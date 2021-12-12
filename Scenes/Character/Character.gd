@@ -11,6 +11,6 @@ func _ready():
 func _process(delta):
 	move_and_slide(direction * SPEED)
 
-func _input(event: InputEvent):
-	direction.x = int(event.is_action_pressed("ui_right")) - int(event.is_action_pressed("ui_left"))
-	direction.y = int(event.is_action_pressed("ui_down")) - int(event.is_action_pressed("ui_up"))
+func _input(_event: InputEvent):
+	direction.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
+	direction.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
