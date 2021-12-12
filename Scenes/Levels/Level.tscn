@@ -1,26 +1,97 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://addons/RegularPolygon2D/RegularPolygon2D.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Character/Character.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Character/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/RegularPolygon2D/RegularPolygon2D.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Levels/Decorations/Chest.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Levels/Decorations/Pot.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10.22, 10.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10.23, 10.5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10.5, 10.1333 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 10, 10.15 )
 
 [node name="Level" type="Node2D"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Character" type="KinematicBody2D" parent="."]
-position = Vector2( 457, 199 )
-script = ExtResource( 2 )
-
-[node name="RegularPolygon2D" type="Node2D" parent="Character"]
-script = ExtResource( 1 )
+[node name="Walls" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="RegularPolygon2D" type="StaticBody2D" parent="Walls"]
+position = Vector2( 500, 0 )
+scale = Vector2( 50, 1 )
+script = ExtResource( 2 )
 centered = true
 num_sides = 4
 size = 32.0
-polygon_color = Color( 0.027451, 0.294118, 1, 1 )
-border_size = 2.0
-border_color = Color( 1, 1, 1, 1 )
 polygon_rotation = 45.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RegularPolygon2D"]
+position = Vector2( 0.219999, 0.5 )
+shape = SubResource( 1 )
+
+[node name="RegularPolygon2D2" type="StaticBody2D" parent="Walls"]
+position = Vector2( 500, 600 )
+scale = Vector2( 50, 1 )
+script = ExtResource( 2 )
+centered = true
+num_sides = 4
+size = 32.0
+polygon_rotation = 45.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RegularPolygon2D2"]
+position = Vector2( 0.23, -0.5 )
+shape = SubResource( 2 )
+
+[node name="RegularPolygon2D4" type="StaticBody2D" parent="Walls"]
+position = Vector2( 0, 293 )
+scale = Vector2( 1, 30 )
+script = ExtResource( 2 )
+centered = true
+num_sides = 4
+size = 32.0
+polygon_rotation = 45.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RegularPolygon2D4"]
+position = Vector2( 0.5, 0.133333 )
+shape = SubResource( 3 )
+
+[node name="RegularPolygon2D3" type="StaticBody2D" parent="Walls"]
+position = Vector2( 1024, 293 )
+scale = Vector2( 1, 30 )
+script = ExtResource( 2 )
+centered = true
+num_sides = 4
+size = 32.0
+polygon_rotation = 45.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RegularPolygon2D3"]
+position = Vector2( -1, 0.15 )
+shape = SubResource( 4 )
+
+[node name="Decorations" type="Node2D" parent="."]
+
+[node name="Chest" parent="Decorations" instance=ExtResource( 3 )]
+position = Vector2( 179, 119 )
+
+[node name="Pot" parent="Decorations" instance=ExtResource( 4 )]
+position = Vector2( 887, 512 )
+
+[node name="Pot2" parent="Decorations" instance=ExtResource( 4 )]
+position = Vector2( 162, 463 )
+
+[node name="Pot3" parent="Decorations" instance=ExtResource( 4 )]
+position = Vector2( 664, 184 )
+
+[node name="Character" parent="." instance=ExtResource( 1 )]
+position = Vector2( 354, 122 )
